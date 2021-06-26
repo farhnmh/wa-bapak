@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "WA BAPAK!",
+"productVersion": "0.1",
+"dataUrl": "wa-bapak-build.data.unityweb",
+"wasmCodeUrl": "wa-bapak-build.wasm.code.unityweb",
+"wasmFrameworkUrl": "wa-bapak-build.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.11f1"
+}

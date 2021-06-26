@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class CarBehaviour : MonoBehaviour
 {
-
     public Rigidbody sphereRb;
 
     public float forwardAccel;
     public float reverseAccel;
     public float maxSpeedf;
+    public float speedInput;
     public float turnStrength;
     public float gravityForce;
+    public GameObject playerCamera;
 
-    private float speedInput, turnInput;
+    private float turnInput;
 
     [SerializeField] private bool grounded;
     public LayerMask whatisGround;
@@ -24,13 +25,14 @@ public class CarBehaviour : MonoBehaviour
 
     private void Start()
     {
+        grounded = true;
         sphereRb.transform.parent = null;
     }
 
     private void Update()
     {
         speedInput = 0;
-        if(Input.GetAxis("Vertical") > 0)
+        if (Input.GetAxis("Vertical") > 0)
         {
             speedInput = Input.GetAxis("Vertical") * forwardAccel * 1000f;
         }
@@ -46,19 +48,31 @@ public class CarBehaviour : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles +
              new Vector3(0f, turnInput * turnStrength * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
         }
-       
+
 
         transform.position = sphereRb.transform.position;
     }
 
+
+    //speedInput = Input.GetAxis("Vertical") * forwardAccel * 1000f;
+    //turnInput = Input.GetAxis("Horizontal");
+
+    //if (grounded)
+    //{
+    //    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles +
+    //     new Vector3(0f, turnInput * turnStrength * Time.deltaTime, 0f));
+    //}
+
+    //transform.position = sphereRb.transform.position;
+
+
     private void FixedUpdate()
     {
-
         grounded = false;
 
         RaycastHit hit;
 
-        if(Physics.Raycast(groundRayPoint.position, -transform.up, out hit, groundRayLength, whatisGround))
+        if (Physics.Raycast(groundRayPoint.position, -transform.up, out hit, groundRayLength, whatisGround))
         {
             grounded = true;
 
@@ -78,10 +92,8 @@ public class CarBehaviour : MonoBehaviour
         else
         {
             sphereRb.drag = 0.1f;
-            sphereRb.AddForce(Vector3.up * -gravityForce * 100f) ;
+            sphereRb.AddForce(Vector3.up * -gravityForce * 100f);
         }
-       
-       
+
     }
 }
-
